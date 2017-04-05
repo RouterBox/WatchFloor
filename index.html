@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Watch Floor</title>
+	</head>
+	<body onload="onCreationComplete()">
+		<script language="JavaScript" type="text/javascript">
+			var boxArray1 = [];
+			var boxArray2 = [];
+			var boxArray3 = [];
+			var boxArray4 = [];
+			var boxArray5 = [];
+			var boxArray6 = [];
+			var boxArray7 = [];
+			var boxArray8 = [];
+			var boxArray9 = [];
+			var boxArray10 = [];
+			
+			var huzzah1;
+			var huzzah2;
+			var huzzah3;
+			var huzzah4;
+			var huzzah5;
+			var huzzah6;
+			var huzzah7;
+			var huzzah8;
+			var huzzah9;
+			var huzzah10;
+			
+			function onCreationComplete(){
+				var numberOfColumns = 10;
+				var lengthOfColumns = 10;
+				
+				for(var i = 1; i <= 10; i++){
+					for(var j = 1; j <= 10; j++){
+						 var canvasTag = '<canvas id="column'+i+'Box'+j+'" style="position:absolute; border:2px solid #000000;"></canvas>';
+						 $('body').append(canvasTag)
+						 var myLightBox = new lightBox();
+						 myLightBox.init(i, j);
+						 this["boxArray"+i].push(myLightBox);
+					}
+					var myHuzzah = new huzzah();
+					myHuzzah.init(i, this["boxArray"+i]);
+					this["huzzah"+i] = myHuzzah;
+					
+				}
+				
+				huzzah2.setLightsToAColor("#00ff00");
+				huzzah5.turboRainbow();
+				huzzah6.nyanCat();
+				huzzah9.testBuffer();
+			}
+			
+			function rgbToHex(r, g, b) {
+				return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+			}
+			function grbToHex(g, r, b) {
+				return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+			}
+			function componentToHex(c) {
+				var hex = c.toString(16);
+				return hex.length == 1 ? "0" + hex : hex;
+			}
+			function allTurboRainbow(){
+				for(var i = 1; i <= 10; i++){
+					this["huzzah"+i].turboRainbow();
+				}
+			}
+			function allNyanCat(){
+				for(var i = 1; i <= 10; i++){
+					this["huzzah"+i].nyanCat();
+				}
+			}
+
+		</script>
+		 
+		 <button onclick="allTurboRainbow()">allTurboRainbow</button>
+		 <button onclick="allNyanCat()">allNyanCat</button>
+		 
+		 <script src="jquery-3.1.1.js" language="javascript"></script>
+		 <script src="lightbox.js" language="javascript"></script>
+		 <script src="huzzah.js" language="javascript"></script>
+	</body>
+</html>
