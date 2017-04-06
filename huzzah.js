@@ -38,6 +38,46 @@ function huzzah(){
 		this.writeBuffer();
 		
 	}
+	this.tenRotate = function(){
+		if(this.timer){
+			clearInterval(this.timer);
+		}
+		this.buffer = [];
+		for(var i = 1; i <= 300; i++){
+			if(i <= 30){
+				this.buffer[i] = grbToHex(0,51,51);
+			}
+			if(i > 30 && i <= 60){
+				this.buffer[i] = grbToHex(0, 51, 153);
+			}
+			if(i > 60 && i <= 90){
+				this.buffer[i] = grbToHex(0,0,255);
+			}
+			if(i > 90 && i <= 120){
+				this.buffer[i] = grbToHex(255,0,0);
+			}
+			if(i > 120 && i <= 150){
+				this.buffer[i] = grbToHex(255,255,0);
+			}
+			if(i > 150 && i <= 180){
+				this.buffer[i] = grbToHex(51,204,0);
+			}
+			if(i > 180 && i <= 210){
+				this.buffer[i] = grbToHex(0,255,0);
+			}
+			if(i > 210 && i <= 240){
+				this.buffer[i] = grbToHex(255, 0, 255);
+			}
+			if(i > 240 && i <= 270){
+				this.buffer[i] = grbToHex(25, 25, 25);
+			}
+			if(i > 270 && i <= 300){
+				this.buffer[i] = grbToHex(255, 255, 255);
+			}
+		}
+		this.writeBuffer();
+		this.timer = createInterval(this.cycleBuffer, this, 50);
+	}
 	this.turboRainbow = function(){
 		if(this.timer){
 			clearInterval(this.timer);

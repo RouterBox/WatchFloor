@@ -1,0 +1,129 @@
+<html>
+<head>
+	<title>RouterPi</title>
+	<script src="jquery-3.1.1.min.js"></script>
+	<script src="danceFunctions.js"></script>
+</head>
+<body>
+	<script>
+		var howManyArms = 5;
+		var whichOne = "huzzah1/"
+		var totalTimeTimerIntervalUsedForCanceling = window.setInterval(onTimerTick, 35);
+		// handles the click event, sends the query
+		
+		var mqttMessageQueue = [];
+		
+		function onTimerTick(){
+			if(mqttMessageQueue.length > 0){
+				var node = mqttMessageQueue.shift();
+				dispatch(node.topic, node.message);
+			}
+		}
+		function queueMessage(obj){
+			mqttMessageQueue.push(obj);
+		}
+		
+		function getOutput() {
+		   $.ajax({
+			  url:'domqtt.php?topic='+document.getElementById('topicTxt').value+'&message='+document.getElementById('messageTxt').value,
+			  complete: function (response) {
+				  $('#output').html(response.responseText);
+			  },
+			  error: function () {
+				  $('#output').html('Bummer: there was an error!');
+			  }
+		  });
+		  return false;
+		}
+		function fireBullet() {
+			var arm = document.getElementById('armTxt').value;
+			var box = document.getElementById('boxTxt').value;
+			var red = document.getElementById('redTxt').value;
+			var green = document.getElementById('greenTxt').value;
+			var blue = document.getElementById('blueTxt').value;
+			var message = '{\"red\":'+red+', \"green\":'+green+', \"blue\":'+blue+', \"arm\":'+arm+', \"box\":'+box+'}'
+			publish("bullet", message);
+		}  
+		function dispatch(topic, message){
+			$.ajax({
+				  url:'domqtt.php?topic='+topic+'&message='+message,
+				  complete: function (response) {
+					  $('#output').html(response.responseText);
+				  },
+				  error: function () {
+					  $('#output').html('Bummer: there was an error!');
+				  }
+			});
+		}
+		function publish(topic, message){
+			if(whichOne == "all"){
+				for(var i = 1; i <= howManyArms; i++){
+					var obj = {};
+					obj.topic = "huzzah"+i+"/"+topic;
+					obj.message = message;
+					queueMessage(obj);
+				}
+			}else{
+				var obj = {};
+				obj.topic = whichOne+topic;
+				obj.message = message;
+				queueMessage(obj);
+			}
+		}
+		function chooseWhichOne(str){
+			whichOne = str;
+		}
+		function turboRainbow(){
+			publish("turboRainbow", "true");
+		}	
+		function nyanCat(){
+			publish("nyanCat", "true");
+		}
+		function whiteTrain(){
+			publish("whiteTrain", "true");
+		}
+		function tenRotate(){
+			publish("tenRotate", "true");
+		}
+		function slideAway(){
+			publish("slideAway", "true");
+		}
+		
+	</script>
+	
+	<center><h1>Dance Floor Interface</h1></center>
+	<br/>
+	Topic: <input id="topicTxt" type="text" maxlength="128" size="100"//>
+	<br/>
+	Message: <input id="messageTxt" type="text" maxlength="128" size="100"/>
+	<br/>
+	<a href="#" onclick="return getOutput();"> Publish </a>
+	<br/>
+	<div id="output"></div>
+	<button onclick="chooseWhichOne('all');"> All </button>
+	<button onclick="chooseWhichOne('huzzah1/');"> Thing 1 </button>
+	<button onclick="chooseWhichOne('huzzah2/');"> Thing 2 </button>
+	<button onclick="chooseWhichOne('huzzah3/');"> Thing 3 </button>
+	<button onclick="chooseWhichOne('huzzah4/');"> Thing 4 </button>
+	<button onclick="chooseWhichOne('huzzah5/');"> Thing 5 </button>
+	<br/>
+	<button onclick="randomSquares();"> randomSquares </button>
+	<button onclick="thirtyToOne();"> thirtyToOne </button>
+	<button onclick="turboRainbow();"> turboRainbow </button>
+	<button onclick="nyanCat();"> nyanCat </button>
+	<button onclick="whiteTrain();"> whiteTrain </button>
+	<button onclick="tenRotate();"> tenRotate </button>
+	<button onclick="slideAway();"> slideAway </button>
+	
+	
+	<br/><br/>
+	
+	
+	<br/><br/>
+	Arm: <input id="armTxt" type="text" maxlength="2" size="5"/>
+	Box: <input id="boxTxt" type="text" maxlength="2" size="5"/>
+	Red: <input id="redTxt" type="text" maxlength="3" size="5"/>
+	Green: <input id="greenTxt" type="text" maxlength="3" size="5"/>
+	Blue: <input id="blueTxt" type="text" maxlength="3" size="5"/>
+	<button onclick="fireBullet();"> fireBullet </button>
+</html>
