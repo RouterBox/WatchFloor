@@ -158,6 +158,7 @@ function huzzah(){
 	
 	
 	this.writeBuffer = function(){
+		var answer = [];
 		for(var i = 0; i < 10; i++){
 			for(var j = 0; j < 30; j++){
 				var lightIndexFromBuffer = (i*30)+j;
@@ -165,8 +166,11 @@ function huzzah(){
 				var boxIndex = i;
 				var lightIndexInsideBox = j+1;
 				
-				this.arrayOfBoxes[boxIndex].setLightNumToVal( lightIndexInsideBox, lightValue );
+				var rowOfThisLightInThisBox = this.arrayOfBoxes[boxIndex].setLightNumToVal( lightIndexInsideBox, lightValue );
+				answer[lightIndexFromBuffer] = (boxIndex * 9 )+rowOfThisLightInThisBox;
 			}
 		}
+		console.log(JSON.stringify(answer));
+		console.log(answer.length);
 	}
 }

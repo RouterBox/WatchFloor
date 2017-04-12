@@ -13,6 +13,8 @@ ws2812.init()
 mytimer = tmr.create()
 buffer = ws2812.newBuffer(300, 3)
 myMQTT:on("message", function(client, topic, data) 
+    print(topic)
+    print(data)
     if not (topic == thingNumber.."bullet")then 
         mytimer:unregister()
     end

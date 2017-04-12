@@ -115,7 +115,7 @@
 				var arr = topic.split("/");
 				var huzzah = arr[0];
 				var method = arr[1];
-				this[huzzah][method]();
+				this[huzzah][method](message);
 			}
 			function publish(topic, message){
 				if(whichOne == "all"){
