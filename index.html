@@ -5,7 +5,7 @@
 	</head>
 	<body onload="onCreationComplete()">
 		<script language="JavaScript" type="text/javascript">
-			var danceFloorIsActuallyBuiltAndIsInFrontOfYouOnTheGroundAndPeopleAreDancingOnIt = false;
+			var danceFloorIsActuallyBuiltAndIsInFrontOfYouOnTheGroundAndPeopleAreDancingOnIt = true;
 			var howManyArms = 10;
 			var whichOne = "huzzah1/"
 			var totalTimeTimerIntervalUsedForCanceling = window.setInterval(onTimerTick, 35);
@@ -41,7 +41,7 @@
 				for(var i = 1; i <= 10; i++){
 					for(var j = 1; j <= 10; j++){
 						 var canvasTag = '<canvas id="column'+i+'Box'+j+'" style="position:absolute; border:2px solid #000000;"></canvas>';
-						 $('body').append(canvasTag)
+						 //$('body').append(canvasTag)
 						 var myLightBox = new lightBox();
 						 myLightBox.init(i, j);
 						 this["boxArray"+i].push(myLightBox);
@@ -83,7 +83,7 @@
 					$.ajax({
 						  url:'domqtt.php?topic='+document.getElementById('topicTxt').value+'&message='+document.getElementById('messageTxt').value,
 						  complete: function (response) {
-							  //$('#output').html(response.responseText);
+							  $('#output').html(response.responseText);
 						  },
 						  error: function () {
 							  $('#output').html('Bummer: there was an error!');
@@ -91,7 +91,7 @@
 					});
 					//return false;
 				}
-				virtualDispatch(document.getElementById('topicTxt').value, document.getElementById('messageTxt').value);
+				//virtualDispatch(document.getElementById('topicTxt').value, document.getElementById('messageTxt').value);
 				return false;
 			}
 			function dispatch(topic, message){
@@ -99,7 +99,7 @@
 					$.ajax({
 						  url:'domqtt.php?topic='+topic+'&message='+message,
 						  complete: function (response) {
-							  //$('#output').html(response.responseText);
+							  $('#output').html(response.responseText);
 						  },
 						  error: function () {
 							  $('#output').html('Bummer: there was an error!');
@@ -107,7 +107,7 @@
 					});
 					//return;
 				}
-				virtualDispatch(topic, message);
+				//virtualDispatch(topic, message);
 			}
 			function virtualDispatch(topic, message){
 				console.log(topic);
@@ -150,10 +150,22 @@
 			function slideAway(){
 				publish("slideAway", "true");
 			}
+			function turnOffLights(){
+				publish("turnOffLights", "true");
+			}
+			
+			function sparkle(){
+				publish("sparkle", "true");
+			}
+			function twinkleToes(){
+				publish("twinkleToes", "true");
+			}
+			
+			
 
 		</script>
 		<center><h1>Dance Floor Interface</h1></center>
-		<div id="dfi" style="position:absolute; left:1250px; top:100px">
+		<div id="dfi" style="position:absolute; left:10px; top:100px;">
 			
 			<br/>
 			Topic: <input id="topicTxt" type="text" maxlength="128" size="100"//>
@@ -177,6 +189,7 @@
 			<button onclick="chooseWhichOne('huzzah10/');"> Huzzah 10 </button>
 			<br/>
 			
+			<button onclick="turnOffLights();"> turnOffLights </button>
 			<button onclick="randomSquares();"> randomSquares </button>
 			<button onclick="thirtyToOne();"> thirtyToOne </button>
 			<button onclick="turboRainbow();"> turboRainbow </button>
@@ -184,17 +197,23 @@
 			<button onclick="whiteTrain();"> whiteTrain </button>
 			<button onclick="tenRotate();"> tenRotate </button>
 			<button onclick="slideAway();"> slideAway </button>
+			<button onclick="sparkle();"> sparkle </button>
+			<button onclick="twinkleToes();"> twinkleToes </button>
+			
 			
 			<br/><br/>
 	
 	
 			<br/><br/>
-			Arm: <input id="armTxt" type="text" maxlength="2" size="5"/>
 			Box: <input id="boxTxt" type="text" maxlength="2" size="5"/>
 			Red: <input id="redTxt" type="text" maxlength="3" size="5"/>
 			Green: <input id="greenTxt" type="text" maxlength="3" size="5"/>
 			Blue: <input id="blueTxt" type="text" maxlength="3" size="5"/>
 			<button onclick="fireBullet();"> fireBullet </button>
+			<button onclick="setRowToColor();"> setBoxToColor </button>
+			<button onclick="setColumnToColor();"> setColumnToColor </button>
+			<button onclick="randomColorWipes();"> randomColorWipes </button>
+			<button onclick="wipeToColor();"> wipeToColor </button>
 		 </div>
 		 
 		 <script src="jquery-3.1.1.js" language="javascript"></script>

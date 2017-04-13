@@ -30,6 +30,54 @@ thirtyToOne = function(){
 	publish(topic, message);
 }
 
+function setColumnToColor() {	
+	var red = document.getElementById('redTxt').value;
+	var green = document.getElementById('greenTxt').value;
+	var blue = document.getElementById('blueTxt').value;
+	var message = '{\"red\":'+red+', \"green\":'+green+', \"blue\":'+blue+'}'
+	publish("lights", message);
+}
+function randomColorWipes() {	
+	var red = document.getElementById('redTxt').value;
+	var green = document.getElementById('greenTxt').value;
+	var blue = document.getElementById('blueTxt').value;
+	var message = '{\"red\":'+red+', \"green\":'+green+', \"blue\":'+blue+'}'
+	publish("randomColorWipes", message);
+}
+function wipeToColor() {	
+	var red = document.getElementById('redTxt').value;
+	var green = document.getElementById('greenTxt').value;
+	var blue = document.getElementById('blueTxt').value;
+	var message = '{\"red\":'+red+', \"green\":'+green+', \"blue\":'+blue+'}'
+	publish("wipeToColor", message);
+}
+function fireBullet() {
+	var box = document.getElementById('boxTxt').value;
+	var red = document.getElementById('redTxt').value;
+	var green = document.getElementById('greenTxt').value;
+	var blue = document.getElementById('blueTxt').value;
+	var message = '{\"red\":'+red+', \"green\":'+green+', \"blue\":'+blue+', \"box\":'+box+'}'
+	publish("bullet", message);
+}  
+function setRowToColor(){
+	var box = document.getElementById('boxTxt').value;
+	var red = document.getElementById('redTxt').value;
+	var green = document.getElementById('greenTxt').value;
+	var blue = document.getElementById('blueTxt').value;
+	var message = '{\"red\":'+red+', \"green\":'+green+', \"blue\":'+blue+', \"box\":'+box+'}'
+	publish("ten", message);
+}
+function setCoordToColor(x, y){
+	var box = y;
+	var column = x;
+	
+	var red = document.getElementById('redTxt').value;
+	var green = document.getElementById('greenTxt').value;
+	var blue = document.getElementById('blueTxt').value;
+	var message = '{\"red\":'+red+', \"green\":'+green+', \"blue\":'+blue+', \"box\":'+box+'}'
+	publish("ten", message);
+}
+
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
