@@ -2,9 +2,116 @@
 <html>
 	<head>
 	<title>Watch Floor</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
 	</head>
-	<body onload="onCreationComplete()">
-		<script language="JavaScript" type="text/javascript">
+	<body>
+		<div class="container-fluid">
+
+			<div class="row">
+			  <div class="col-md-12">
+				<center><h1>Dance Floor Interface</h1></center>
+
+			  </div>			  
+			</div>
+
+			
+			<div class="row">
+			  <div class="col-md-12 hidden-xs">
+				
+				
+			<!-- 	
+				<button onclick="chooseWhichOne('all');"> All </button>
+				<button onclick="chooseWhichOne('huzzah1/');"> Huzzah 1 </button>
+				<button onclick="chooseWhichOne('huzzah2/');"> Huzzah 2 </button>
+				<button onclick="chooseWhichOne('huzzah3/');"> Huzzah 3 </button>
+				<button onclick="chooseWhichOne('huzzah4/');"> Huzzah 4 </button>
+				<button onclick="chooseWhichOne('huzzah5/');"> Huzzah 5 </button>
+				<button onclick="chooseWhichOne('huzzah6/');"> Huzzah 6 </button>
+				<button onclick="chooseWhichOne('huzzah7/');"> Huzzah 7 </button>
+				<button onclick="chooseWhichOne('huzzah8/');"> Huzzah 8 </button>
+				<button onclick="chooseWhichOne('huzzah9/');"> Huzzah 9 </button>
+				<button onclick="chooseWhichOne('huzzah10/');"> Huzzah 10 </button> -->
+				<div class="btn-group" data-toggle="buttons">
+					<label class="btn btn-default active"><input type="radio" autocomplete="off" onclick="chooseWhichOne('all');" checked> All </label>
+					<label class="btn btn-default"><input type="radio" autocomplete="off" onclick="chooseWhichOne('huzzah1/');"> Huzzah 1 </label>
+					<label class="btn btn-default"><input type="radio" autocomplete="off" onclick="chooseWhichOne('huzzah2/');"> Huzzah 2 </label>
+					<label class="btn btn-default"><input type="radio" autocomplete="off" onclick="chooseWhichOne('huzzah3/');"> Huzzah 3 </label>
+					<label class="btn btn-default"><input type="radio" autocomplete="off" onclick="chooseWhichOne('huzzah4/');"> Huzzah 4 </label>
+					<label class="btn btn-default"><input type="radio" autocomplete="off" onclick="chooseWhichOne('huzzah5/');"> Huzzah 5 </label>
+					<label class="btn btn-default"><input type="radio" autocomplete="off" onclick="chooseWhichOne('huzzah6/');"> Huzzah 6 </label>
+					<label class="btn btn-default"><input type="radio" autocomplete="off" onclick="chooseWhichOne('huzzah7/');"> Huzzah 7 </label>
+					<label class="btn btn-default"><input type="radio" autocomplete="off" onclick="chooseWhichOne('huzzah8/');"> Huzzah 8 </label>
+					<label class="btn btn-default"><input type="radio" autocomplete="off" onclick="chooseWhichOne('huzzah9/');"> Huzzah 9 </label>
+					<label class="btn btn-default"><input type="radio" autocomplete="off" onclick="chooseWhichOne('huzzah10/');"> Huzzah 10 </label>
+				</div>				
+				<br>
+				<br>				
+				  </div>			  
+			</div>		
+
+			<div class="row">
+				
+				<!-- <div class="col-md-1"><button class="btn btn-primary" onclick="turnOffLights();"> turnOffLights </button></div> -->
+				<div class="col-md-1"><button class="btn btn-primary" onclick="randomSquares();"> randomSquares </button></div>
+				<!-- <div class="col-md-1"><button class="btn btn-primary" onclick="thirtyToOne();"> thirtyToOne </button></div> -->
+				<div class="col-md-1"><button class="btn btn-primary" onclick="nyanCat();"> nyanCat </button></div>
+				<div class="col-md-1"><button class="btn btn-primary" onclick="turboRainbow();"> turboRainbow </button></div>
+				<div class="col-md-1"><button class="btn btn-primary" onclick="tenRotate();"> tenRotate </button></div>
+				<div class="col-md-1"><button class="btn btn-primary" onclick="whiteTrain();"> whiteTrain </button></div>
+				<div class="col-md-1"><button class="btn btn-primary" onclick="sparkle();"> sparkle </button></div>
+				<div class="col-md-1"><button class="btn btn-primary" onclick="twinkleToes();"> twinkleToes </button></div>
+				<div class="col-md-1"><button class="btn btn-primary" onclick="randomColorWipes();"> randomColorWipes </button></div>
+				
+				<div class="col-md-4">&nbsp;</div>
+
+				<!-- <div class="col-md-1"><button class="btn btn-primary" onclick="slideAway();"> slideAway </button></div> -->
+				
+			</div>				
+								
+		
+			<div class="row">
+			  <div class="col-md-12 hidden-xs">
+				<br/><br/>
+				Box: <input id="boxTxt" type="text" maxlength="2" size="5"/>
+				Red: <input id="redTxt" type="text" maxlength="3" size="5"/>
+				Green: <input id="greenTxt" type="text" maxlength="3" size="5"/>
+				Blue: <input id="blueTxt" type="text" maxlength="3" size="5"/>
+				<button onclick="fireBullet();"> fireBullet </button>
+				<button onclick="setRowToColor();"> setBoxToColor </button>
+				<button onclick="setColumnToColor();"> setColumnToColor </button>
+				<button onclick="wipeToColor();"> wipeToColor </button>
+			 </div>
+			 
+		 </div>
+
+
+
+		 <div class="row">
+			  <div class="col-md-12 hidden-xs">
+				<br/>
+				Topic: <input id="topicTxt" type="text" maxlength="128" size="100"//>
+				<br/>
+				Message: <input id="messageTxt" type="text" maxlength="128" size="100"/>
+				<br/>
+				<a href="#" onclick="return getOutput();"> Publish </a>
+				<br/>
+				<div id="output"></div>
+			  </div>			  
+			</div>			
+		</div>
+
+
+		 <script src="jquery-3.1.1.js" language="javascript"></script>
+		 <script src="lightbox.js" language="javascript"></script>
+		 <script src="huzzah.js" language="javascript"></script>
+		 <script src="danceFunctions.js"></script>
+
+		 <script language="JavaScript" type="text/javascript">
 			var danceFloorIsActuallyBuiltAndIsInFrontOfYouOnTheGroundAndPeopleAreDancingOnIt = true;
 			var howManyArms = 10;
 			var whichOne = "huzzah1/"
@@ -161,64 +268,19 @@
 				publish("twinkleToes", "true");
 			}
 			
+
+			$(document).ready(function(){
+				chooseWhichOne("all");
+				onCreationComplete();				
+			});
 			
 
 		</script>
-		<center><h1>Dance Floor Interface</h1></center>
-		<div id="dfi" style="position:absolute; left:10px; top:100px;">
-			
-			<br/>
-			Topic: <input id="topicTxt" type="text" maxlength="128" size="100"//>
-			<br/>
-			Message: <input id="messageTxt" type="text" maxlength="128" size="100"/>
-			<br/>
-			<a href="#" onclick="return getOutput();"> Publish </a>
-			<br/>
-			<div id="output"></div>
-			
-			<button onclick="chooseWhichOne('all');"> All </button>
-			<button onclick="chooseWhichOne('huzzah1/');"> Huzzah 1 </button>
-			<button onclick="chooseWhichOne('huzzah2/');"> Huzzah 2 </button>
-			<button onclick="chooseWhichOne('huzzah3/');"> Huzzah 3 </button>
-			<button onclick="chooseWhichOne('huzzah4/');"> Huzzah 4 </button>
-			<button onclick="chooseWhichOne('huzzah5/');"> Huzzah 5 </button>
-			<button onclick="chooseWhichOne('huzzah6/');"> Huzzah 6 </button>
-			<button onclick="chooseWhichOne('huzzah7/');"> Huzzah 7 </button>
-			<button onclick="chooseWhichOne('huzzah8/');"> Huzzah 8 </button>
-			<button onclick="chooseWhichOne('huzzah9/');"> Huzzah 9 </button>
-			<button onclick="chooseWhichOne('huzzah10/');"> Huzzah 10 </button>
-			<br/>
-			
-			<button onclick="turnOffLights();"> turnOffLights </button>
-			<button onclick="randomSquares();"> randomSquares </button>
-			<button onclick="thirtyToOne();"> thirtyToOne </button>
-			<button onclick="turboRainbow();"> turboRainbow </button>
-			<button onclick="nyanCat();"> nyanCat </button>
-			<button onclick="whiteTrain();"> whiteTrain </button>
-			<button onclick="tenRotate();"> tenRotate </button>
-			<button onclick="slideAway();"> slideAway </button>
-			<button onclick="sparkle();"> sparkle </button>
-			<button onclick="twinkleToes();"> twinkleToes </button>
-			
-			
-			<br/><br/>
 	
-	
-			<br/><br/>
-			Box: <input id="boxTxt" type="text" maxlength="2" size="5"/>
-			Red: <input id="redTxt" type="text" maxlength="3" size="5"/>
-			Green: <input id="greenTxt" type="text" maxlength="3" size="5"/>
-			Blue: <input id="blueTxt" type="text" maxlength="3" size="5"/>
-			<button onclick="fireBullet();"> fireBullet </button>
-			<button onclick="setRowToColor();"> setBoxToColor </button>
-			<button onclick="setColumnToColor();"> setColumnToColor </button>
-			<button onclick="randomColorWipes();"> randomColorWipes </button>
-			<button onclick="wipeToColor();"> wipeToColor </button>
-		 </div>
-		 
-		 <script src="jquery-3.1.1.js" language="javascript"></script>
-		 <script src="lightbox.js" language="javascript"></script>
-		 <script src="huzzah.js" language="javascript"></script>
-		 <script src="danceFunctions.js"></script>
-	</body>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </body>
 </html>
