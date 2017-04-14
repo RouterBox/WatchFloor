@@ -262,5 +262,25 @@ function crabGuy2(){
 	]
 	return arr;
 }
+function bunny(){
+	var b = {"r":0 "g":176 "b":240 };
+	var w = {"r":64 "g":64 "b":64 };
+	var p = {"r":251 "g":171 "b":240 };
+	var k = {"r":0 "g":0 "b":0 };
+	
+	var arr = [
+		[b,b,b,b,b,b,b,b,b,b],
+		[b,b,b,w,p,b,b,b,b,b],
+		[b,b,w,w,w,w,w,w,w,b],
+		[b,w,w,w,k,w,b,b,b,b],
+		[b,b,w,w,w,w,w,w,w,b],
+		[b,b,w,w,w,b,b,b,b,b],
+		[b,w,w,w,w,b,b,b,b,b],
+		[b,w,w,w,w,b,b,b,b,b],
+		[b,b,b,b,w,b,b,b,b,b],
+		[b,b,b,b,b,b,b,b,b,b]
+	]
+	return arr;
+}
 
 
