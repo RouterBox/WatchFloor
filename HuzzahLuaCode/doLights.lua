@@ -1,6 +1,6 @@
 print("do lights")
 ws2812.init()
-buffer = ws2812.newBuffer(300, 3)
+buffer = ws2812.newBuffer(30, 3)
 buffer:fill(5, 5, 5)
 
 --GRB

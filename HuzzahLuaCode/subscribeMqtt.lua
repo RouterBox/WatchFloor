@@ -1,13 +1,5 @@
 myMQTT:subscribe("wiimote/motion", 0, function(conn) print("subscribe success") end)
-myMQTT:subscribe(thingNumber.."lights", 0, function(conn) print("subscribe success") end)
-myMQTT:subscribe(thingNumber.."ten", 0, function(conn) print("subscribe success") end)
-myMQTT:subscribe(thingNumber.."thirtyToOne", 0, function(conn) print("subscribe success") end)
-myMQTT:subscribe(thingNumber.."turboRainbow", 0, function(conn) print("subscribe success") end)
-myMQTT:subscribe(thingNumber.."whiteTrain", 0, function(conn) print("subscribe success") end)
-myMQTT:subscribe(thingNumber.."nyanCat", 0, function(conn) print("subscribe success") end)
-myMQTT:subscribe(thingNumber.."tenRotate", 0, function(conn) print("subscribe success") end)
-myMQTT:subscribe(thingNumber.."slideAway", 0, function(conn) print("subscribe success") end)
-myMQTT:subscribe(thingNumber.."bullet", 0, function(conn) print("subscribe success") end)
+myMQTT:subscribe(thingNumber.."#", 0, function(conn) print("subscribe success") end)
 
 ws2812.init()
 mytimer = tmr.create()
@@ -28,6 +20,25 @@ myMQTT:on("message", function(client, topic, data)
     buffer:fill(green, red, blue)
     print("------------")
     ws2812.write(buffer)
+  end
+  if(topic == thingNumber.."wipeToColor")then
+    wipeToAColor(data)
+  end
+  if(topic == thingNumber.."randomColorWipes")then
+    randomColorWipes()
+  end
+  if(topic == thingNumber.."floorHeight")then
+    rowNumber = tonumber(data)
+    buffer = ws2812.newBuffer(300, 3)
+    for lightnum=1, 300 do
+        if (rowIndex[lightnum] <= rowNumber) then
+            buffer:set(lightnum, green, red, blue) 
+        end
+        if (rowIndex[lightnum] > rowNumber) then
+            buffer:set(lightnum, blue, green, red) 
+        end
+   end   
+   ws2812.write(buffer)
   end
   if(topic == thingNumber.."lights")then
     print(data)
@@ -103,9 +114,34 @@ myMQTT:on("message", function(client, topic, data)
   if(topic == thingNumber.."slideAway")then
     dofile("slideAway.lua")
   end  
+  if(topic == thingNumber.."tuws2812.write(buffer)rnOffLights")then
+    dofile("turnOffLights.lua")
+  end
   if(topic == thingNumber.."turnOffLights")then
     dofile("turnOffLights.lua")
-  end  
-end)
+  end
+  if(topic == thingNumber.."run")then
+    dofile(data)
+  end    
+  if(topic == thingNumber.."update")then
+    print("trying to update")
+    print(data)
+    updateDirections = cjson.decode(data)
+    urlToGet = updateDirections["url"]
+    fileNameToSaveTo = updateDirections["fileName"]
+    http.get(urlToGet, nil, function(code, data)
+        if (code < 0) then
+          print("HTTP request failed")
+        end
+        if(code == 200) then
+          file.open(fileNameToSaveTo, "w+")
+          file.write(data)
+          file.close()
+          print("update complete")
+          dofile(fileNameToSaveTo)
+        end  
+    end)
+   end 
+end)  
 myMQTT:on("connect", function(client) print ("connected") end)
 myMQTT:on("offline", function(client) print ("offline") end)
